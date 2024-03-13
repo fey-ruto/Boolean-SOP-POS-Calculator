@@ -3,16 +3,26 @@ var_complement = ["r̄" ,"x̄", "ȳ", "z̄"]
 
 valuesPerVariable = {"r": [], "x": [], "y": [], "z":[]}
 
-def SOP(DegreeOfFunction, table):
+# user_Values = input("Enter your values for the function: ")
+
+def SOP(DegreeOfFunction, stringOfValues):
+    currentString = ""
     arrayOfPositions = [] # stores the positions with output as one
+
+    # get the positions of 1s in the table
+    for x, index in enumerate(stringOfValues):
+        if x == 1:
+            arrayOfPositions.append(index)
+
+    # determine values for each index
     for row in arrayOfPositions:
-        currentString = ""
         for col in range(DegreeOfFunction):
             if table[row][col] == 0:
                 currentString += var_complement[col]
             else:
                 currentString += var[col]
         currentString += " + "
+    return currentString
 
 def POS(DegreeOfFunction, table):
     arrayOfPositions =[]
@@ -35,7 +45,6 @@ def POS(DegreeOfFunction, table):
     pos_expression = pos_expression[:-3]
 
     return pos_expression
-    pass
 
 # construct table from a list of assigned values of 0s and 1s
 def table():
