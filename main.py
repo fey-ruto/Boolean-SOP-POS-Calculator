@@ -21,8 +21,10 @@ def SOP(DegreeOfFunction, stringOfValues):
                 currentString += var_complement[col]
             else:
                 currentString += var[col]
-        currentString += " + "
-    return currentString
+        if row == len(arrayOfPositions)-1:
+            return currentString
+        else:
+            currentString += " + "
 
 def POS(DegreeOfFunction, table):
     arrayOfPositions =[]
