@@ -14,7 +14,27 @@ def SOP(DegreeOfFunction, table):
                 currentString += var[col]
         currentString += " + "
 
-def POS():
+def POS(DegreeOfFunction, table):
+    arrayOfPositions =[]
+    for i, row in enumerate(table):
+        if 0 in row:
+            arrayOfPositions.append(i)
+
+    pos_expression = ""
+    for row_index in arrayOfPositions:
+        current_string = ""
+        for col in range(DegreeOfFunction):
+            if table[row_index][col] == 1:
+                current_string += var_complement[col]
+            else:
+                current_string += var[col]
+                if col < DegreeOfFunction - 1:
+                     current_string += " + "
+        pos_expression += "(" + current_string + ")" + " . "
+    
+    pos_expression = pos_expression[:-3]
+
+    return pos_expression
     pass
 
 # construct table from a list of assigned values of 0s and 1s
