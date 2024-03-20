@@ -57,6 +57,7 @@ def SOP(DegreeOfFunction, stringOfValues, table):
             return currentString
         else:
             currentString += " + "
+    return currentString
 
 def POS(DegreeOfFunction, table):
     arrayOfPositions =[]
@@ -80,21 +81,48 @@ def POS(DegreeOfFunction, table):
 
     return pos_expression
 
+def displayTable(DegreeOfFunction, user_table):
+    functionDef = "F("
+    # make reference to var list to get variables
+    for i in range(DegreeOfFunction):
+        print(var[i] , '\t', end='')
+        if i == DegreeOfFunction - 1:
+            functionDef += var[i] + ")"
+            print(functionDef + "\t", end='')
+            print()
+        else:
+            functionDef += var[i] + ","
+
+    # values populate into display
+    for x in range(len(user_table)):
+        for y in range(len(user_table[x])):
+            print(user_table[x][y], "\t", end='')
+        print()
+
+
 def main():
     # Ask user to enter the degree of the function
-    DegreeOfFunction = int(input("Enter the degree of the function"))
-    # make reference to var list to get variables
-    var
-    # Create the empty table with pre-filled values of variables
-    table = table(DegreeOfFunction)
-
-
-    # Use degree of the function to find the number of values per variable
-
+    DegreeOfFunction = int(input("Enter the degree of the function: "))
     
+    # Create the empty table with pre-filled values of variables
+    user_table = table(DegreeOfFunction)
+    displayTable(DegreeOfFunction, user_table)
+
     # Ask user to input the values of the function in a string format with delimiters: " "
-    # Display the values in the table
+    user_Values = input("Enter your values in single line, for example, 0011\n Your Values: ")
+
+    # append user values into array table
+    for x in range(len(user_table)):
+        user_table[x].append(user_Values[x])
+    
+    displayTable(DegreeOfFunction, user_table)
     # Ask the user if they want to do POS or SOP calculation	
+    user_choice = input("Do you want to perform SOP or POS operation? Kindly enter POS or SOP: ")
+    if user_choice.upper() == "SOP":
+        expression = SOP(DegreeOfFunction, user_Values, user_table)
+    elif user_choice.upper() == "POS":
+        expression = POS(DegreeOfFunction, user_table)
+    else:
+        print("Invalid Input")
 
-    # ask for user input
-
+main()
