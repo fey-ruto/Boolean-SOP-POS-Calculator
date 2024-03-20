@@ -1,8 +1,6 @@
 var = ["r", "x", "y", "z"]
 var_complement = ["r̄" ,"x̄", "ȳ", "z̄"]
 
-valuesPerVariable = {"r": [], "x": [], "y": [], "z":[]}
-
 # user_Values = input("Enter your values for the function: ")
 
 # construct table from a list of assigned values of 0s and 1s
@@ -36,10 +34,10 @@ def table(n):
             else:
                 start = 0
             first_index = i
-        print(table)
         exp = exp//2
+    return table
 
-def SOP(DegreeOfFunction, stringOfValues):
+def SOP(DegreeOfFunction, stringOfValues, table):
     currentString = ""
     arrayOfPositions = [] # stores the positions with output as one
 
@@ -83,17 +81,20 @@ def POS(DegreeOfFunction, table):
     return pos_expression
 
 def main():
-    pass
+    # Ask user to enter the degree of the function
+    DegreeOfFunction = int(input("Enter the degree of the function"))
+    # make reference to var list to get variables
+    var
+    # Create the empty table with pre-filled values of variables
+    table = table(DegreeOfFunction)
 
-# Ask user to enter the degree of the function
-# make reference to var list to get variables
 
-# Use degree of the function to find the number of values per variable
+    # Use degree of the function to find the number of values per variable
 
-# Create the empty table with pre-filled values of variables
-# Ask user to input the values of the function in a string format with delimiters: " "
-# Display the values in the table
-# Ask the user if they want to do POS or SOP calculation	
+    
+    # Ask user to input the values of the function in a string format with delimiters: " "
+    # Display the values in the table
+    # Ask the user if they want to do POS or SOP calculation	
 
-# ask for user input
-table(2)
+    # ask for user input
+
