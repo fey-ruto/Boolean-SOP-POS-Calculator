@@ -42,8 +42,8 @@ def SOP(DegreeOfFunction, stringOfValues, table):
     arrayOfPositions = [] # stores the positions with output as one
 
     # get the positions of 1s in the table
-    for x, index in enumerate(stringOfValues):
-        if x == 1:
+    for index, x in enumerate(stringOfValues):
+        if x == "1":
             arrayOfPositions.append(index)
 
     # determine values for each index
@@ -53,10 +53,11 @@ def SOP(DegreeOfFunction, stringOfValues, table):
                 currentString += var_complement[col]
             else:
                 currentString += var[col]
-        if row == len(arrayOfPositions)-1:
-            return currentString
-        else:
+
+        # if at last index do not add "+"
+        if row != arrayOfPositions[len(arrayOfPositions)-1]:
             currentString += " + "
+
     return currentString
 
 def POS(DegreeOfFunction, table):
@@ -119,9 +120,9 @@ def main():
     # Ask the user if they want to do POS or SOP calculation	
     user_choice = input("Do you want to perform SOP or POS operation? Kindly enter POS or SOP: ")
     if user_choice.upper() == "SOP":
-        expression = SOP(DegreeOfFunction, user_Values, user_table)
+        print("SOP Expression:", SOP(DegreeOfFunction, user_Values, user_table))
     elif user_choice.upper() == "POS":
-        expression = POS(DegreeOfFunction, user_table)
+        print("POS Expression:", POS(DegreeOfFunction, user_table))
     else:
         print("Invalid Input")
 
