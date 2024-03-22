@@ -54,17 +54,18 @@ def SOP(DegreeOfFunction, stringOfValues, table):
             else:
                 currentString += var[col]
 
+        # fix this why this. I believe it is causing issues in the code
         # if at last index do not add "+"
         if row != arrayOfPositions[len(arrayOfPositions)-1]:
             currentString += " + "
 
     return currentString
 
-def POS(DegreeOfFunction, table):
+def POS(DegreeOfFunction, StringOfValues, table):
     arrayOfPositions =[]
-    for i, row in enumerate(table):
-        if 0 in row:
-            arrayOfPositions.append(i)
+    for index, i in enumerate(StringOfValues):
+        if i == "0":
+            arrayOfPositions.append(index)
 
     pos_expression = ""
     for row_index in arrayOfPositions:
@@ -93,37 +94,58 @@ def displayTable(DegreeOfFunction, user_table):
             print()
         else:
             functionDef += var[i] + ","
-
+    
+    # print(len(functionDef))
     # values populate into display
+    space = 0
     for x in range(len(user_table)):
         for y in range(len(user_table[x])):
-            print(user_table[x][y], "\t", end='')
+            if y == DegreeOfFunction-1:
+                space = 2
+            print(user_table[x][y], space * " " ,"\t", end='')
         print()
 
 
 def main():
-    # Ask user to enter the degree of the function
-    DegreeOfFunction = int(input("Enter the degree of the function: "))
-    
+    while True:
+        # Ask user to enter the degree of the function
+        DegreeOfFunction = int(input("Enter the degree of the function: "))
+
+        # check if degree of function is greater than 4
+        if DegreeOfFunction <= 4 and DegreeOfFunction > 0:
+            break
+
+        
     # Create the empty table with pre-filled values of variables
     user_table = table(DegreeOfFunction)
     displayTable(DegreeOfFunction, user_table)
 
-    # Ask user to input the values of the function in a string format with delimiters: " "
-    user_Values = input("Enter your values in single line, for example, 0011\n Your Values: ")
+    # make sure user values are equal to the number of values required
+    while True:
+        # Ask user to input the values of the function in a string format
+        user_Values = input("Enter your values in single line, for example, 0011\nYour Values: ")
+        if len(user_Values) == 2**DegreeOfFunction:
+            break
 
     # append user values into array table
     for x in range(len(user_table)):
         user_table[x].append(user_Values[x])
     
     displayTable(DegreeOfFunction, user_table)
-    # Ask the user if they want to do POS or SOP calculation	
-    user_choice = input("Do you want to perform SOP or POS operation? Kindly enter POS or SOP: ")
-    if user_choice.upper() == "SOP":
-        print("SOP Expression:", SOP(DegreeOfFunction, user_Values, user_table))
-    elif user_choice.upper() == "POS":
-        print("POS Expression:", POS(DegreeOfFunction, user_table))
-    else:
-        print("Invalid Input")
 
-main()
+    # Display POS or SOP calculations
+    print("SOP Expression:", SOP(DegreeOfFunction, user_Values, user_table))
+    print("POS Expression:", POS(DegreeOfFunction, user_Values, user_table))
+
+
+print("Welcome to the sum of product and product of sum calculator. Enter")
+choice = int(input("1: Start \n2: End\nYour Choice:"))
+count = 0
+if choice == 1:
+    count += 1
+    main()
+else:
+    if count >= 1:
+        print("Thanks for using me!!")
+    else:
+        print("Bye!!")
