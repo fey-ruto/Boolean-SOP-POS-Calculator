@@ -54,34 +54,51 @@ def SOP(DegreeOfFunction, stringOfValues, table):
             else:
                 currentString += var[col]
 
-        # fix this why this. I believe it is causing issues in the code
         # if at last index do not add "+"
         if row != arrayOfPositions[len(arrayOfPositions)-1]:
             currentString += " + "
 
     return currentString
 
-def POS(DegreeOfFunction, StringOfValues, table):
-    arrayOfPositions =[]
-    for index, i in enumerate(StringOfValues):
-        if i == "0":
+def POS(DegreeOfFunction, stringOfValues, table):
+    currentString = ""
+    arrayOfPositions = [] # stores the positions with output as one
+
+    # get the positions of 1s in the table
+    for index, x in enumerate(stringOfValues):
+        if x == "0":
             arrayOfPositions.append(index)
 
-    pos_expression = ""
-    for row_index in arrayOfPositions:
-        current_string = ""
+    # determine values for each index
+    for row in arrayOfPositions:
         for col in range(DegreeOfFunction):
-            if table[row_index][col] == 1:
-                current_string += var_complement[col]
+            if table[row][col] == 1:
+                currentString += var_complement[col] +  " + "
             else:
-                current_string += var[col]
-                if col < DegreeOfFunction - 1:
-                     current_string += " + "
-        pos_expression += "(" + current_string + ")" + " . "
-    
-    pos_expression = pos_expression[:-3]
+                currentString += var[col] + " + "
+        currentString = "(" + currentString[:-3] + ")"
 
-    return pos_expression
+    return currentString
+    # arrayOfPositions =[]
+    # for index, i in enumerate(StringOfValues):
+    #     if i == "0":
+    #         arrayOfPositions.append(index)
+
+    # pos_expression = ""
+    # for row_index in arrayOfPositions:
+    #     current_string = ""
+    #     for col in range(DegreeOfFunction):
+    #         if table[row_index][col] == 1:
+    #             current_string += var_complement[col]
+    #         else:
+    #             current_string += var[col]
+    #             if col < DegreeOfFunction-1:
+    #                  current_string += " + "
+    #     pos_expression += "(" + current_string + ")" + " . "
+    
+    # pos_expression = pos_expression[:-3]
+
+    # return pos_expression
 
 def displayTable(DegreeOfFunction, user_table):
     functionDef = "F("
